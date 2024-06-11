@@ -14,15 +14,16 @@ sources += files
 
 if sys.platform.startswith('linux') or sys.platform == 'darwin':
     macros = [('__linux__', '1')]
+    openmp_name = '-fopenmp'
 else:
     macros = [('__linux__', '0')]
-
+    openmp_name = '/openmp'
 
 exts = [Extension("pypoisson", sources,
         language="c++",
         define_macros=macros,
-        extra_compile_args = ["-w","-fopenmp"],
-        extra_link_args=["-fopenmp"]
+        extra_compile_args = ["-w",openmp_name],
+        extra_link_args=[openmp_name]
         )]
 setup(
     name='pypoisson',
